@@ -1,0 +1,25 @@
+import Form from '../models/Form.js'
+
+class formController {
+
+    static async getForms(req, res){
+        try{
+            const formsList = await Form.find({}); //sem parâmetros pra retornar todos
+            res.status(200).json(formsList);
+        }catch(e){
+            res.status(500).send({message: e.message});
+        }
+    }
+
+    static async createForm(req, res){
+        try{
+            const newForm = await Form.create(req.body);
+            res.status(201).json({message: "criado com sucesso", form: newForm});
+        }catch(e){
+            res.status(500).send({message: `Erro ao criar form: ${e.message}`});
+        }
+    }
+
+}
+
+export default formController;

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Execução de Formulário</title>
+    <link rel="stylesheet" href="./form.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Formulário</h1>
+        <form id="formExecution">
+            <div class="form-group">
+                <label for="textField">Campo de Texto</label>
+                <input type="text" id="textField" class="text-field" placeholder="Digite algo...">
+            </div>
+
+            <div class="form-button">
+                <button type="button" onclick="submitForm()">Enviar</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function submitForm() {
+            const textField = document.getElementById('textField').value;
+            alert(`Texto: ${textField}`);
+        }
+    </script>
+</body>
+</html>
