@@ -11,6 +11,19 @@ class formController {
         }
     }
 
+    static async getFormById(req, res){
+        try{
+            const form = await Form.findById(req.params.id);
+            if(form){
+                res.status(200).json(form);
+            }else{
+                res.status(404).send({message: "Formulário não encontrado"});
+            }
+        }catch(e){
+            res.status(500).send({message: e.message});
+        }
+    }
+
     static async createForm(req, res){
         try{
             const newForm = await Form.create(req.body);
