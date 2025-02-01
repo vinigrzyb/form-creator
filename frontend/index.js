@@ -1,4 +1,4 @@
-const formId = '679836d947c53c863fd719eb';
+const formId = '679d5fa2037dfbb3f8247ea2';
 const url = `http://localhost:3000/forms/${formId}`;
 
 //puxa o json do form
@@ -30,7 +30,7 @@ function getForm(){
             label.textContent = field.label;
             formGroup.appendChild(label);
 
-            //campo texto
+            //tipos de campo
             let newField
             if(field.type === 'text'){
                 newField = document.createElement('input');
@@ -38,7 +38,33 @@ function getForm(){
                 newField.setAttribute('id', 'text-field');
                 newField.setAttribute('class', 'text-field');
                 newField.setAttribute('placeholder', 'Digite algo...');
+            }else if(field.type === 'number'){
+                newField = document.createElement('input');
+                newField.setAttribute('type', 'number');
+                newField.setAttribute('id', 'number-field');
+                newField.setAttribute('class', 'number-field');
+                newField.setAttribute('placeholder', 'Insira um número...');
+            }else if(field.type === 'list'){
+                //cria a lista
+                newField = document.createElement('select');
+                newField.setAttribute('id', 'selectField');
+                newField.setAttribute('class', 'select-field');
+                newField.setAttribute('placeholder', 'Selecione uma opção...');
+                //adiciona as opções da lista
+                if(field.listOptions && field.listOptions.length > 0){
+                    for(let i = 0; i < field.listOptions.length; i++){
+                        const option = document.createElement('option');
+                        option.setAttribute('value', i+1);
+                        option.textContent = field.listOptions[i];
+                        newField.appendChild(option);
+                    }
+                }
             }
+            
+            if(field.required === true){
+                newField.setAttribute('required', true);
+            }
+            
             formGroup.appendChild(newField);
             
             formExecution.appendChild(formGroup);

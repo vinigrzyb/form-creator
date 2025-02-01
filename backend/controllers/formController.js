@@ -26,7 +26,9 @@ class formController {
 
     static async createForm(req, res){
         try{
-            const newForm = await Form.create(req.body);
+            const newForm = new Form(req.body);
+            const savedForm = await newForm.save();
+            console.log(req.body);
             res.status(201).json({message: "criado com sucesso", form: newForm});
         }catch(e){
             res.status(500).send({message: `Erro ao criar form: ${e.message}`});
